@@ -6,7 +6,11 @@ public class SpacecraftController : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
 
+    public GameObject  BulletPrefab;
+    public Transform LaunchOffset;
+
     private Rigidbody2D rb;
+
 
     private void Start()
     {
@@ -32,5 +36,12 @@ public class SpacecraftController : MonoBehaviour
             // Stop the spacecraft if no touch input is detected
             rb.velocity = Vector2.zero;
         }
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(BulletPrefab,LaunchOffset.position,transform.rotation);
+        }
     }
 }
+
+    
