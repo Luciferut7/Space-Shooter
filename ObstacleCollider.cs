@@ -28,4 +28,13 @@ public class ObstacleCollider : MonoBehaviour
         obj.SomePropertyOrMethod();*/
 
     }
+     private void OnCollisionEnter2D(Collision2D collision)
+ {
+     // Check if the collision is with the object you want to destroy.
+     if (collision.gameObject.CompareTag("Destroyable"))
+     {
+         // Destroy the other object (the one that collided with this object).
+         Destroy(collision.gameObject);
+     }
+ }
 }
