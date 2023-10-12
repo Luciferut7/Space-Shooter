@@ -11,10 +11,19 @@ public class bullet : MonoBehaviour
         transform.position += -transform.right * Time.deltaTime * Speed;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+   /* void OnCollisionEnter2D(Collision2D collision)
     {
         
         Destroy(gameObject);
-    }
+    }*/
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the collision is with the object you want to destroy.
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            // Destroy the other object (the one that collided with this object).
+            Destroy(collision.gameObject);
+        }
+    }
 }
