@@ -6,19 +6,30 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     public static bool isGameOver;
+    public static bool isLevelOver;
     public GameObject gameOverScreen;
     public GameObject pauseMenuScreen;
+    public GameObject levelOverScreen;
     private void Awake()
     {
         isGameOver = false;
     }
 
+    private void Awakee()
+    {
+        isLevelOver = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(isGameOver)
+        if (isGameOver)
         {
             gameOverScreen.SetActive(true);
+        }
+        if (isLevelOver)
+        {
+            levelOverScreen.SetActive(true);
         }
     }
 
@@ -37,5 +48,10 @@ public class PlayerManager : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenuScreen.SetActive(false);
+    }
+
+    public void NextLevel()
+    {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
