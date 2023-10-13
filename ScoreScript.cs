@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreScript : MonoBehaviour
 {
     public TextMeshProUGUI MyscoreText;
     private int ScoreNum;
+    public int FinalScore = 20;
     void Start()
     {
         ScoreNum = 0;
@@ -24,5 +26,13 @@ public class ScoreScript : MonoBehaviour
         }
     }
 
- 
+    public void CollectCoin()
+    {
+        
+        if (ScoreNum >= FinalScore)
+        {
+            PlayerManager.isLevelOver = true;
+            gameObject.SetActive(false);
+        }
+    }
 }
