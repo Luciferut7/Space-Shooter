@@ -2,39 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleCollider : MonoBehaviour
+public class ObstacleController: MonoBehaviour
+
 {
-    public float speed = 5.0f;
-    private Transform spawnPoint;
+    public float speed = 5.0f; // Set the speed of the obstacle.
 
     void Start()
     {
-        spawnPoint = GameObject.Find("SpawnPoint").transform;
-        transform.position = spawnPoint.position;
+        // Randomly spawn the obstacle outside the top of the screen.
+        Vector3 spawnPosition = new Vector3(Random.Range(-5f, 5f), 7f, 0f);
+        transform.position = spawnPosition;
     }
 
     void Update()
     {
-        // Move the obstacle downward
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
+        // Move the obstacle downward.
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
 
-        // Check if the obstacle is below the screen
-        if (transform.position.y < -10f) // You may adjust this value as needed
+        // If the obstacle is below the bottom of the screen, destroy it.
+        if (transform.position.y < -5f)
         {
-            Destroy(gameObject); // Destroy the obstacle when it's off-screen
+            Destroy(gameObject);
         }
-       /* SomeClass obj = null;
-        // Attempting to access a property or method on obj will result in the error.
-        obj.SomePropertyOrMethod();*/
-
     }
-     private void OnCollisionEnter2D(Collision2D collision)
- {
-     // Check if the collision is with the object you want to destroy.
-     if (collision.gameObject.CompareTag("Destroyable"))
-     {
-         // Destroy the other object (the one that collided with this object).
-         Destroy(collision.gameObject);
-     }
- }
+
+
+
+  private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the collision is with the object you want to destroy.
+        if (collision.gameObject.CompareTag("Destroyable"))
+        {
+            // Destroy the other object (the one that collided with this object).
+            PlayerManager.isGameOver = true;
+            gameObject.SetActive(false);
+        }
+    }
+
+  
+
 }
+
